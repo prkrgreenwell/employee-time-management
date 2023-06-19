@@ -25,8 +25,8 @@ model Shift {
     id          String     @id @default(uuid())
     clockIn     DateTime
     clockOut    DateTime?
-    User        User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId      String?
+    User        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId      String
     PayPeriod   PayPeriod? @relation(fields: [payPeriodId], references: [id])
     payPeriodId String?
 }
