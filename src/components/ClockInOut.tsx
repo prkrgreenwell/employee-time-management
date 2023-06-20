@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import { Button } from "./Button";
 import { CurrentTime } from "./CurrentTime";
 import { api } from "~/utils/api";
@@ -32,6 +32,22 @@ export function ClockInOut() {
   const user = session.data?.user;
   const createShift = api.clock.clockIn.useMutation({});
   const endShift = api.clock.clockOut.useMutation({});
+
+  // useEffect(() => {
+  //   const checkClockInStatus = async () => {
+  //     try {
+  //       const session = await getSession();
+  //       if (session && session.user && session.user.clockOutTime) {
+  //         setIsClockIn(true);
+  //         setIsClockOut(false);
+  //         setClockInTime(new Date(session.user.clockInTime));
+  //       }
+  //     } catch (error) {
+  //       console.error("Error checking clock-in status:", error);
+  //     }
+  //   };
+  //   checkClockInStatus();
+  // }, []);
 
   function handleClockIn(e: FormEvent) {
     e.preventDefault();
