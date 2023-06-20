@@ -22,13 +22,13 @@ model PayPeriod {
 }
 
 model Shift {
-    id          String     @id @default(uuid())
+    id          String    @id @default(uuid())
     clockIn     DateTime
     clockOut    DateTime?
-    User        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+    User        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId      String
-    PayPeriod   PayPeriod? @relation(fields: [payPeriodId], references: [id])
-    payPeriodId String?
+    PayPeriod   PayPeriod @relation(fields: [payPeriodId], references: [id])
+    payPeriodId String
 }
 
 // Necessary for Next auth

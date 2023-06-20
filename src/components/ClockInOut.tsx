@@ -27,6 +27,7 @@ const CurrentShift = () => {
 export function ClockInOut() {
   const [isClockIn, setIsClockIn] = useState(false);
   const [isClockOut, setIsClockOut] = useState(true);
+  const [clockInTime, setClockInTime] = useState<Date | null>(null);
   const session = useSession();
   const user = session.data?.user;
   const createShift = api.clock.clockIn.useMutation({});
@@ -41,6 +42,7 @@ export function ClockInOut() {
 
     setIsClockIn(true);
     setIsClockOut(false);
+    setClockInTime(clockInTime);
   }
 
   function handleClockOut(e: FormEvent) {
@@ -60,6 +62,11 @@ export function ClockInOut() {
         {user != null ? (
           <>
             <h1>Hello {user.name}</h1>
+            {isClockIn && clockInTime && (
+              <p>
+                Clocked in at: <b>{clockInTime.toLocaleString()}</b>
+              </p>
+            )}
             <CurrentTime />
             <div className="flex">
               <Button
